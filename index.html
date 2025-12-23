@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kuis Alfabet Jepang</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- MENU -->
+<div id="menu">
+  <h1>Kuis Alfabet Jepang</h1>
+
+  <div class="mode-buttons">
+    <button class="mode-btn" data-mode="hiragana">Hiragana</button>
+    <button class="mode-btn" data-mode="katakana">Katakana</button>
+    <button class="mode-btn" data-mode="kanji">Kanji</button>
+    <button class="mode-btn" data-mode="typing">Typing Jepang</button>
+  </div>
+
+  <div id="letter-selection" class="hidden">
+    <p>Pilih huruf:</p>
+    <div id="letters-container"></div>
+    <button id="select-random">Acak</button>
+    <button id="select-all">Pilih Semua</button>
+    <button id="deselect-all">Hapus Semua</button>
+  </div>
+
+  <div class="settings">
+    <label>Timer per soal:
+      <input type="number" id="timer-input" value="10">
+    </label>
+    <label>Total soal:
+      <input type="number" id="total-input" value="20">
+    </label>
+  </div>
+
+  <button id="play-btn" disabled>Play</button>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz" class="hidden">
+  <h2>Soal <span id="count">1</span>-<span id="total-display">20</span></h2>
+  <div id="question" class="question"></div>
+  <input id="answer" placeholder="Jawab di sini" autocomplete="off">
+  <button id="submit-answer">Submit</button>
+  <div id="timer"></div>
+</div>
+
+<!-- RESULT -->
+<div id="quiz-result" class="hidden">
+  <h2>Hasil Kuis</h2>
+  <ul id="result-list"></ul>
+  <button id="restart-btn">Restart</button>
+</div>
+
+<!-- TYPING MODE -->
+<div id="typing-mode" class="hidden">
+  <h2>Typing Jepang</h2>
+
+  <div id="typing-text"></div>
+
+  <input
+    type="text"
+    id="typing-input"
+    placeholder="Ketik romaji lalu tekan spasi"
+    autocomplete="off"
+  >
+
+<div id="typing-info">
+  <span id="typing-timer">60</span> detik
+  |
+  <span id="typing-meaning"></span>
+  |
+  <button id="toggle-meaning">Tampilkan arti</button>
+</div>
+
+
+  <button id="typing-exit">Kembali ke Menu</button>
+</div>
+
+
+
+<script src="js/data.js"></script>
+<script src="js/state.js"></script>
+<script src="js/elements.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/letters.js"></script>
+<script src="js/typing.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/result.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

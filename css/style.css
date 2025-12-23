@@ -1,0 +1,178 @@
+.hidden { display: none; }
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+    background-color: burlywood;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.mode-buttons {
+    margin-bottom: 20px;
+}
+
+.mode-btn.active {
+    background-color: #2ecc71;
+    color: white;
+}
+
+input#answer {
+    padding: 10px;
+    font-size: 18px;
+    width: 200px;
+    text-align: center;
+}
+
+input.correct {
+    background-color: #2ecc71;
+    color: white;
+}
+
+input.wrong {
+    background-color: #e74c3c;
+    color: white;
+}
+
+li.correct { color: #2ecc71; }
+li.wrong { color: #e74c3c; }
+
+#mic-btn.listening {
+    background-color: #3498db;
+    color: white;
+}
+
+.question {
+    font-size: 60px;
+    margin: 20px 0;
+}
+
+#timer {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.settings { margin: 15px 0; }
+.settings label { display: block; margin: 5px 0; }
+
+#letters-container label {
+    display: inline-block;
+    margin: 3px;
+}
+
+#letters-container{
+background-color: aquamarine;
+  width: 420px;
+  height: 160px;
+  background: red;
+  top: 50%;
+  left: 32%;
+  position: relative;
+}
+
+/* ===== Input Error Animation ===== */
+.input-error {
+  border: 2px solid red;
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-5px); }
+  50%  { transform: translateX(5px); }
+  75%  { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* =========================
+   TYPING MODE
+========================= */
+
+#typing-mode {
+  margin-top: 30px;
+}
+
+#typing-text {
+width: 60%;
+max-width: 600px;
+height: 100px;
+margin: 10px auto;
+border-radius: 8px;
+padding: 15px;
+overflow: hidden;
+background-color: #fff8dc;
+  line-height: 40px;        /* 🔥 KUNCI BARIS */
+  white-space: normal;
+word-break: normal;
+font-size: 32px;
+
+line-height: 60px;
+
+
+white-space: normal;
+
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE */
+}
+
+#typing-text::-webkit-scrollbar {
+  display: none; /* Chrome, Edge, Safari */
+}
+
+
+
+
+#typing-text span {
+margin-right: 5px;
+}
+
+#typing-text .current {
+background-color: yellow;
+padding: 2px 2px;
+border-radius: 4px;
+}
+
+#typing-text .correct-word {
+color: green;
+}
+
+#typing-text .wrong-word {
+color: red;
+}
+
+#typing-input {
+padding: 10px;
+font-size: 18px;
+width: 300px;
+text-align: center;
+margin-top: 10px;
+}
+
+#typing-info {
+margin-top: 10px;
+font-weight: bold;
+}
+
+#typing-meaning {
+color: #555;
+margin-left: 5px;
+}
+
+#typing-exit {
+margin-top: 15px;
+}
+
+#toggle-meaning {
+font-size: 12px;
+padding: 4px 8px;
+cursor: pointer;
+}
+
+.hidden-meaning {
+visibility: hidden;
+}

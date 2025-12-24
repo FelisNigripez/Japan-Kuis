@@ -176,3 +176,7 @@ cursor: pointer;
 .hidden-meaning {
 visibility: hidden;
 }
+
+.hidden {
+  display: none;
+}

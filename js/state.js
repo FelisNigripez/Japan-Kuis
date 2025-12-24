@@ -10,4 +10,3 @@ let timer;
 let timeLeft = 10;
 let questionTimer = 10;
 let totalQuestions = 20;
-

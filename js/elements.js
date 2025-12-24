@@ -32,3 +32,4 @@ const timerDiv = document.getElementById("timer");
 
 const resultList = document.getElementById("result-list");
 const restartBtn = document.getElementById("restart-btn");
+

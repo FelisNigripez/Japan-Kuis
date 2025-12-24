@@ -103,6 +103,12 @@ const typingWords = [
   { jp: "わるい", romaji: "warui", arti: "buruk" }
 ];
 
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
 /* =========================
    STATE
@@ -111,6 +117,10 @@ let typingIndex = 0;
 let typingTime = 60;
 let typingTimer = null;
 let meaningVisible = false; // ⬅ awalnya DISMBUNYIKAN
+
+let correctWords = 0;
+let totalTypedWords = 0;
+let typingStartTime = 0;
 
 
 
@@ -124,6 +134,8 @@ const typingTimerSpan = document.getElementById("typing-timer");
 const typingMeaning = document.getElementById("typing-meaning");
 const typingExitBtn = document.getElementById("typing-exit");
 const toggleMeaningBtn = document.getElementById("toggle-meaning");
+const typingWpmSpan = document.getElementById("typing-wpm");
+const typingAccuracySpan = document.getElementById("typing-accuracy");
 typingText.addEventListener("wheel", e => e.preventDefault());
 typingText.addEventListener("touchmove", e => e.preventDefault());
 
@@ -133,11 +145,15 @@ typingText.addEventListener("touchmove", e => e.preventDefault());
    START TYPING MODE
 ========================= */
 function startTypingMode() {
+
+  shuffleArray(typingWords);
+
   // sembunyikan menu & kuis
   document.getElementById("menu").classList.add("hidden");
   document.getElementById("quiz").classList.add("hidden");
   document.getElementById("quiz-result").classList.add("hidden");
-  
+  document.getElementById("typing-stats").classList.add("hidden");
+
 meaningVisible = false;
 typingMeaning.classList.add("hidden-meaning");
 toggleMeaningBtn.textContent = "Tampilkan arti";
@@ -156,6 +172,14 @@ toggleMeaningBtn.textContent = "Tampilkan arti";
 
   typingInput.focus();
   startTypingTimer();
+
+  correctWords = 0;
+totalTypedWords = 0;
+typingStartTime = Date.now();
+
+typingWpmSpan.textContent = "0";
+typingAccuracySpan.textContent = "0%";
+
 }
 
 /* =========================
@@ -221,6 +245,7 @@ function startTypingTimer() {
       clearInterval(typingTimer);
       typingInput.disabled = true;
       alert("Waktu habis!");
+      document.getElementById("typing-stats").classList.remove("hidden");
     }
   }, 1000);
 }
@@ -235,16 +260,25 @@ typingInput.addEventListener("keydown", e => {
     const userInput = typingInput.value.trim().toLowerCase();
     if (userInput === "") return;
 
+    totalTypedWords++; // ⬅️ WAJIB (INI KUNCINYA)
+
     const currentWord = typingWords[typingIndex];
     const spans = typingText.querySelectorAll("span");
 
     spans[typingIndex].classList.remove("current");
 
-    if (userInput === currentWord.romaji ||  userInput === currentWord.jp) {
+    const isCorrect =
+      userInput === currentWord.romaji ||
+      userInput === currentWord.jp;
+
+    if (isCorrect) {
+      correctWords++; // ⬅️ WAJIB
       spans[typingIndex].classList.add("correct-word");
     } else {
       spans[typingIndex].classList.add("wrong-word");
     }
+    updateTypingStats();
+
 
     typingIndex++;
     typingInput.value = "";
@@ -253,13 +287,12 @@ typingInput.addEventListener("keydown", e => {
       spans[typingIndex].classList.add("current");
       updateMeaning();
       scrollToCurrentWord();
-
     } else {
       clearInterval(typingTimer);
-      alert("Typing selesai!");
     }
   }
 });
+
 
 /* =========================
    EXIT BUTTON
@@ -279,3 +312,20 @@ toggleMeaningBtn.addEventListener("click", () => {
     : "Tampilkan arti";
 });
 
+function updateTypingStats() {
+  const elapsedTime =
+    (Date.now() - typingStartTime) / 1000;
+
+  const wpm =
+    elapsedTime > 0
+      ? Math.round((correctWords / elapsedTime) * 60)
+      : 0;
+
+  const accuracy =
+    totalTypedWords > 0
+      ? Math.round((correctWords / totalTypedWords) * 100)
+      : 0;
+
+  typingWpmSpan.textContent = wpm;
+  typingAccuracySpan.textContent = accuracy + "%";
+}

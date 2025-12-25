@@ -118,6 +118,9 @@ let typingTime = 60;
 let typingTimer = null;
 let meaningVisible = false; // ⬅ awalnya DISMBUNYIKAN
 
+let combo = 0;
+let maxCombo = 0;
+
 let correctWords = 0;
 let totalTypedWords = 0;
 let typingStartTime = 0;
@@ -145,6 +148,11 @@ typingText.addEventListener("touchmove", e => e.preventDefault());
    START TYPING MODE
 ========================= */
 function startTypingMode() {
+
+  combo = 0;
+  maxCombo = 0;
+  document.getElementById("combo-display").classList.add("hidden");
+
 
   shuffleArray(typingWords);
 
@@ -264,6 +272,7 @@ typingInput.addEventListener("input", () => {
   } else {
     SoundManager.play(SoundManager.typeWrong);
   }
+  
 });
 
 typingInput.addEventListener("keydown", e => {
@@ -273,7 +282,7 @@ typingInput.addEventListener("keydown", e => {
     const userInput = typingInput.value.trim().toLowerCase();
     if (userInput === "") return;
 
-    totalTypedWords++; // ⬅️ tetap
+    totalTypedWords++; // tetap
 
     const currentWord = typingWords[typingIndex];
     const spans = typingText.querySelectorAll("span");
@@ -285,19 +294,25 @@ typingInput.addEventListener("keydown", e => {
       userInput === currentWord.jp;
 
     if (isCorrect) {
-      correctWords++; // ⬅️ tetap
+      correctWords++; // tetap
       spans[typingIndex].classList.add("correct-word");
+
+      // 🔥 COMBO NAIK
+      updateCombo(true);
 
       // 🔊 SOUND: kata benar
       SoundManager.play(SoundManager.wordCorrect);
     } else {
       spans[typingIndex].classList.add("wrong-word");
 
+      // ❌ COMBO RESET
+      updateCombo(false);
+
       // 🔊 SOUND: kata salah
       SoundManager.play(SoundManager.wordWrong);
     }
 
-    updateTypingStats(); // ⬅️ tetap
+    updateTypingStats(); // tetap
 
     typingIndex++;
     typingInput.value = "";
@@ -311,6 +326,7 @@ typingInput.addEventListener("keydown", e => {
     }
   }
 });
+
 
 
 /* =========================
@@ -347,4 +363,24 @@ function updateTypingStats() {
 
   typingWpmSpan.textContent = wpm;
   typingAccuracySpan.textContent = accuracy + "%";
+}
+
+function updateCombo(isCorrect) {
+  const comboEl = document.getElementById("combo-display");
+  const comboCount = document.getElementById("combo-count");
+
+  if (isCorrect) {
+    combo++;
+    if (combo > maxCombo) maxCombo = combo;
+
+    comboEl.classList.remove("hidden");
+    comboCount.textContent = combo;
+
+    comboEl.classList.add("pop");
+    setTimeout(() => comboEl.classList.remove("pop"), 150);
+  } else {
+    combo = 0;
+    comboCount.textContent = combo;
+    comboEl.classList.add("hidden");
+  }
 }

@@ -180,3 +180,19 @@ visibility: hidden;
 .hidden {
   display: none;
 }
+
+.combo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff9800;
+  margin-bottom: 8px;
+}
+
+.combo.pop {
+  transform: scale(1.3);
+  transition: transform 0.15s ease;
+}
+
+.hidden {
+  display: none;
+}

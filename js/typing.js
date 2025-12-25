@@ -253,6 +253,19 @@ function startTypingTimer() {
 /* =========================
    INPUT HANDLER
 ========================= */
+typingInput.addEventListener("input", () => {
+  const value = typingInput.value.toLowerCase();
+  const target = typingWords[typingIndex]?.romaji || "";
+
+  if (!value) return;
+
+  if (target.startsWith(value)) {
+    SoundManager.play(SoundManager.typeCorrect);
+  } else {
+    SoundManager.play(SoundManager.typeWrong);
+  }
+});
+
 typingInput.addEventListener("keydown", e => {
   if (e.key === " ") {
     e.preventDefault();
@@ -260,7 +273,7 @@ typingInput.addEventListener("keydown", e => {
     const userInput = typingInput.value.trim().toLowerCase();
     if (userInput === "") return;
 
-    totalTypedWords++; // ⬅️ WAJIB (INI KUNCINYA)
+    totalTypedWords++; // ⬅️ tetap
 
     const currentWord = typingWords[typingIndex];
     const spans = typingText.querySelectorAll("span");
@@ -272,13 +285,19 @@ typingInput.addEventListener("keydown", e => {
       userInput === currentWord.jp;
 
     if (isCorrect) {
-      correctWords++; // ⬅️ WAJIB
+      correctWords++; // ⬅️ tetap
       spans[typingIndex].classList.add("correct-word");
+
+      // 🔊 SOUND: kata benar
+      SoundManager.play(SoundManager.wordCorrect);
     } else {
       spans[typingIndex].classList.add("wrong-word");
-    }
-    updateTypingStats();
 
+      // 🔊 SOUND: kata salah
+      SoundManager.play(SoundManager.wordWrong);
+    }
+
+    updateTypingStats(); // ⬅️ tetap
 
     typingIndex++;
     typingInput.value = "";

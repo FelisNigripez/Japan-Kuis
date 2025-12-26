@@ -125,6 +125,10 @@ let correctWords = 0;
 let totalTypedWords = 0;
 let typingStartTime = 0;
 
+let streakCount = 0;
+let maxStreak = 0;
+
+
 
 
 /* =========================
@@ -141,6 +145,7 @@ const typingWpmSpan = document.getElementById("typing-wpm");
 const typingAccuracySpan = document.getElementById("typing-accuracy");
 typingText.addEventListener("wheel", e => e.preventDefault());
 typingText.addEventListener("touchmove", e => e.preventDefault());
+const typingStreak = document.getElementById("typing-streak");
 
 
 
@@ -152,6 +157,12 @@ function startTypingMode() {
   combo = 0;
   maxCombo = 0;
   document.getElementById("combo-display").classList.add("hidden");
+
+  streakCount = 0;
+maxStreak = 0;
+typingStreak.classList.add("hidden");
+typingStreak.textContent = "🔥 STREAK x0";
+
 
 
   shuffleArray(typingWords);
@@ -282,7 +293,7 @@ typingInput.addEventListener("keydown", e => {
     const userInput = typingInput.value.trim().toLowerCase();
     if (userInput === "") return;
 
-    totalTypedWords++; // tetap
+    totalTypedWords++; // ⬅️ tetap
 
     const currentWord = typingWords[typingIndex];
     const spans = typingText.querySelectorAll("span");
@@ -294,10 +305,10 @@ typingInput.addEventListener("keydown", e => {
       userInput === currentWord.jp;
 
     if (isCorrect) {
-      correctWords++; // tetap
+      correctWords++; // ⬅️ tetap
       spans[typingIndex].classList.add("correct-word");
 
-      // 🔥 COMBO NAIK
+      // 🔥 STREAK / COMBO NAIK
       updateCombo(true);
 
       // 🔊 SOUND: kata benar
@@ -305,14 +316,14 @@ typingInput.addEventListener("keydown", e => {
     } else {
       spans[typingIndex].classList.add("wrong-word");
 
-      // ❌ COMBO RESET
+      // ❌ STREAK / COMBO RESET
       updateCombo(false);
 
       // 🔊 SOUND: kata salah
       SoundManager.play(SoundManager.wordWrong);
     }
 
-    updateTypingStats(); // tetap
+    updateTypingStats(); // ⬅️ tetap
 
     typingIndex++;
     typingInput.value = "";

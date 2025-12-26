@@ -153,6 +153,7 @@ const typingStreak = document.getElementById("typing-streak");
    START TYPING MODE
 ========================= */
 function startTypingMode() {
+  shuffleTypingWords();
 
   combo = 0;
   maxCombo = 0;
@@ -328,13 +329,20 @@ typingInput.addEventListener("keydown", e => {
     typingIndex++;
     typingInput.value = "";
 
-    if (typingIndex < typingWords.length) {
-      spans[typingIndex].classList.add("current");
-      updateMeaning();
-      scrollToCurrentWord();
-    } else {
-      clearInterval(typingTimer);
-    }
+typingIndex++;
+
+// 🔁 JIKA SUDAH HABIS → LOOP ULANG
+if (typingIndex >= typingWords.length) {
+  typingIndex = 0;
+  shuffleTypingWords(); // optional tapi direkomendasikan
+  renderTypingText();
+}
+
+const span = typingText.querySelectorAll("span");
+spans[typingIndex].classList.add("current");
+updateMeaning();
+scrollToCurrentWord();
+
   }
 });
 
@@ -393,5 +401,13 @@ function updateCombo(isCorrect) {
     combo = 0;
     comboCount.textContent = combo;
     comboEl.classList.add("hidden");
+  }
+}
+
+function shuffleTypingWords() {
+  
+  for (let i = typingWords.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [typingWords[i], typingWords[j]] = [typingWords[j], typingWords[i]];
   }
 }

@@ -288,63 +288,60 @@ typingInput.addEventListener("input", () => {
 });
 
 typingInput.addEventListener("keydown", e => {
-  if (e.key === " ") {
-    e.preventDefault();
+  if (e.key !== " ") return;
 
-    const userInput = typingInput.value.trim().toLowerCase();
-    if (userInput === "") return;
+  e.preventDefault();
 
-    totalTypedWords++; // ⬅️ tetap
+  const userInput = typingInput.value.trim().toLowerCase();
+  if (userInput === "") return;
 
-    const currentWord = typingWords[typingIndex];
-    const spans = typingText.querySelectorAll("span");
+  totalTypedWords++;
 
-    spans[typingIndex].classList.remove("current");
+  const currentWord = typingWords[typingIndex];
+  const spans = typingText.querySelectorAll("span");
 
-    const isCorrect =
-      userInput === currentWord.romaji ||
-      userInput === currentWord.jp;
+  // hapus status current lama
+  spans[typingIndex].classList.remove("current");
 
-    if (isCorrect) {
-      correctWords++; // ⬅️ tetap
-      spans[typingIndex].classList.add("correct-word");
+  const isCorrect =
+    userInput === currentWord.romaji ||
+    userInput === currentWord.jp;
 
-      // 🔥 STREAK / COMBO NAIK
-      updateCombo(true);
+  if (isCorrect) {
+    correctWords++;
+    spans[typingIndex].classList.add("correct-word");
 
-      // 🔊 SOUND: kata benar
-      SoundManager.play(SoundManager.wordCorrect);
-    } else {
-      spans[typingIndex].classList.add("wrong-word");
+    updateCombo(true);
+    SoundManager.play(SoundManager.wordCorrect);
+  } else {
+    spans[typingIndex].classList.add("wrong-word");
 
-      // ❌ STREAK / COMBO RESET
-      updateCombo(false);
-
-      // 🔊 SOUND: kata salah
-      SoundManager.play(SoundManager.wordWrong);
-    }
-
-    updateTypingStats(); // ⬅️ tetap
-
-    typingIndex++;
-    typingInput.value = "";
-
-typingIndex++;
-
-// 🔁 JIKA SUDAH HABIS → LOOP ULANG
-if (typingIndex >= typingWords.length) {
-  typingIndex = 0;
-  shuffleTypingWords(); // optional tapi direkomendasikan
-  renderTypingText();
-}
-
-const span = typingText.querySelectorAll("span");
-spans[typingIndex].classList.add("current");
-updateMeaning();
-scrollToCurrentWord();
-
+    updateCombo(false);
+    SoundManager.play(SoundManager.wordWrong);
   }
+
+  updateTypingStats();
+
+  // 🔥 NAIK INDEX SATU KALI SAJA
+  typingIndex++;
+
+  typingInput.value = "";
+
+  // 🔁 JIKA HABIS → LOOP
+  if (typingIndex >= typingWords.length) {
+    typingIndex = 0;
+    shuffleTypingWords();
+    renderTypingText();
+  }
+
+  // set current baru
+  const newSpans = typingText.querySelectorAll("span");
+  newSpans[typingIndex].classList.add("current");
+
+  updateMeaning();
+  scrollToCurrentWord();
 });
+
 
 
 

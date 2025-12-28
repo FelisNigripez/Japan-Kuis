@@ -42,6 +42,11 @@ playBtn.onclick = () => {
   menuDiv.classList.add("hidden");
   quizDiv.classList.remove("hidden");
 
+  hintVisible = false;
+hintContainer.classList.add("hidden");
+toggleHintBtn.textContent = "Tampilkan arti";
+
+
   nextQuestion();
 };
 
@@ -64,8 +69,22 @@ function nextQuestion() {
   currentAnswer = source[currentChar];
 
   questionDiv.textContent = currentChar;
+  // reset hint
+hintVisible = false;
+hintContainer.classList.add("hidden");
+toggleHintBtn.textContent = "Tampilkan arti";
+
+// isi hint sesuai mode
+if (mode === "hiragana" || mode === "katakana") {
+  hintText.textContent = currentAnswer; // romaji
+} else if (mode === "kanji") {
+  hintText.textContent = currentAnswer; // arti / bacaan
+}
+
   answerInput.value = "";
   answerInput.classList.remove("correct", "wrong", "input-error");
+
+  
 
   startTimer();
 }
@@ -161,3 +180,14 @@ answerInput.addEventListener("input", () => {
   }
 });
 
+
+
+toggleHintBtn.onclick = () => {
+  hintVisible = !hintVisible;
+
+  hintContainer.classList.toggle("hidden", !hintVisible);
+
+  toggleHintBtn.textContent = hintVisible
+    ? "Sembunyikan arti"
+    : "Tampilkan arti";
+};

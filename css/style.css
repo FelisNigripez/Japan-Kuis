@@ -1,81 +1,106 @@
-.hidden { display: none; }
+/* =========================
+   GLOBAL
+========================= */
+
+.hidden {
+  display: none;
+}
 
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 20px;
-    background-color: burlywood;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+  background-color: burlywood;
 }
 
 button {
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
 }
 
+/* =========================
+   MODE BUTTON
+========================= */
+
 .mode-buttons {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .mode-btn.active {
-    background-color: #2ecc71;
-    color: white;
+  background-color: #2ecc71;
+  color: white;
+}
+
+/* =========================
+   QUIZ
+========================= */
+
+.question {
+  font-size: 60px;
+  margin: 20px 0;
+}
+
+#timer {
+  margin: 10px 0;
+  font-weight: bold;
 }
 
 input#answer {
-    padding: 10px;
-    font-size: 18px;
-    width: 200px;
-    text-align: center;
+  padding: 10px;
+  font-size: 18px;
+  width: 200px;
+  text-align: center;
 }
 
 input.correct {
-    background-color: #2ecc71;
-    color: white;
+  background-color: #2ecc71;
+  color: white;
 }
 
 input.wrong {
-    background-color: #e74c3c;
-    color: white;
+  background-color: #e74c3c;
+  color: white;
 }
 
 li.correct { color: #2ecc71; }
 li.wrong { color: #e74c3c; }
 
-#mic-btn.listening {
-    background-color: #3498db;
-    color: white;
+/* =========================
+   SETTINGS
+========================= */
+
+.settings {
+  margin: 15px 0;
 }
 
-.question {
-    font-size: 60px;
-    margin: 20px 0;
+.settings label {
+  display: block;
+  margin: 5px 0;
 }
 
-#timer {
-    margin: 10px 0;
-    font-weight: bold;
-}
+/* =========================
+   LETTER SELECTION
+========================= */
 
-.settings { margin: 15px 0; }
-.settings label { display: block; margin: 5px 0; }
+#letters-container {
+  background-color: #fff8dc;
+  width: 90%;
+  max-width: 600px;
+  margin: 15px auto;
+  padding: 10px;
+  border-radius: 8px;
+}
 
 #letters-container label {
-    display: inline-block;
-    margin: 3px;
+  display: inline-block;
+  margin: 3px;
 }
 
-#letters-container{
-background-color: aquamarine;
-  width: 420px;
-  height: 160px;
-  background: red;
-  top: 50%;
-  left: 32%;
-  position: relative;
-}
+/* =========================
+   INPUT ERROR
+========================= */
 
-/* ===== Input Error Animation ===== */
 .input-error {
   border: 2px solid red;
   animation: shake 0.3s;
@@ -98,88 +123,70 @@ background-color: aquamarine;
 }
 
 #typing-text {
-width: 60%;
-max-width: 600px;
-height: 100px;
-margin: 10px auto;
-border-radius: 8px;
-padding: 15px;
-overflow: hidden;
-background-color: #fff8dc;
-  line-height: 40px;        /* 🔥 KUNCI BARIS */
+  width: 60%;
+  max-width: 600px;
+  height: 100px;
+  margin: 10px auto;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #fff8dc;
+  font-size: 32px;
+  line-height: 60px;
+  overflow: hidden;
   white-space: normal;
-word-break: normal;
-font-size: 32px;
+  word-break: normal;
 
-line-height: 60px;
-
-
-white-space: normal;
-
-  scrollbar-width: none;      /* Firefox */
-  -ms-overflow-style: none;   /* IE */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 #typing-text::-webkit-scrollbar {
-  display: none; /* Chrome, Edge, Safari */
+  display: none;
 }
 
-
-
-
 #typing-text span {
-margin-right: 5px;
+  margin-right: 5px;
 }
 
 #typing-text .current {
-background-color: yellow;
-padding: 2px 2px;
-border-radius: 4px;
+  background-color: yellow;
+  padding: 2px;
+  border-radius: 4px;
 }
 
 #typing-text .correct-word {
-color: green;
+  color: green;
 }
 
 #typing-text .wrong-word {
-color: red;
+  color: red;
 }
 
 #typing-input {
-padding: 10px;
-font-size: 18px;
-width: 300px;
-text-align: center;
-margin-top: 10px;
+  padding: 10px;
+  font-size: 18px;
+  width: 300px;
+  text-align: center;
+  margin-top: 10px;
 }
 
 #typing-info {
-margin-top: 10px;
-font-weight: bold;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 #typing-meaning {
-color: #555;
-margin-left: 5px;
-}
-
-#typing-exit {
-margin-top: 15px;
-}
-
-#toggle-meaning {
-font-size: 12px;
-padding: 4px 8px;
-cursor: pointer;
+  color: #555;
+  margin-left: 5px;
 }
 
 .hidden-meaning {
-visibility: hidden;
+  visibility: hidden;
 }
 
-.hidden {
-  display: none;
-}
+/* =========================
+   COMBO & STREAK
+========================= */
 
 .combo {
   font-size: 18px;
@@ -191,10 +198,6 @@ visibility: hidden;
 .combo.pop {
   transform: scale(1.3);
   transition: transform 0.15s ease;
-}
-
-.hidden {
-  display: none;
 }
 
 .typing-streak {
@@ -210,12 +213,45 @@ visibility: hidden;
   100% { transform: scale(1); opacity: 1; }
 }
 
+/* =========================
+   HINT
+========================= */
+
 #hint-container {
   margin-top: 10px;
   font-size: 18px;
   color: #666;
 }
 
-.hidden {
-  display: none;
+/* =========================
+   MENU MODE LAYOUT
+========================= */
+
+.main-mode-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin: 0 auto 15px;
+}
+
+.mode-left,
+.mode-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* =========================
+   GUESS SUBMENU
+========================= */
+
+#guess-submenu {
+  margin-top: 8px;
+}
+
+#guess-submenu button {
+  margin: 5px;
+  padding: 8px 16px;
 }

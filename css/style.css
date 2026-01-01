@@ -217,11 +217,18 @@ li.wrong { color: #e74c3c; }
    HINT
 ========================= */
 
-#hint-container {
-  margin-top: 10px;
-  font-size: 18px;
-  color: #666;
+
+#toggle-hint-btn {
+  font-size: 14px;
+  padding: 6px 12px;
 }
+
+#hint-container {
+  font-size: 16px;
+  color: #555;
+}
+
+
 
 /* =========================
    MENU MODE LAYOUT

@@ -1,0 +1,5 @@
+- [x] Add dark mode toggle button to index.html menu
+- [x] Add dark mode CSS styles to style.css
+- [x] Add darkMode state to state.js
+- [x] Implement toggle logic in menu.js
+- [x] Test the toggle functionality

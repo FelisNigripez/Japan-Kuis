@@ -5,6 +5,7 @@ let currentAnswer = "";
 let history = [];
 let count = 0;
 
+let darkMode = localStorage.getItem("darkMode") === "true";
 
 let timer;
 let timeLeft = 10;

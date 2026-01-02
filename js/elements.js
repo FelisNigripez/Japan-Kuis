@@ -37,4 +37,7 @@ const hintContainer = document.getElementById("hint-container");
 const hintText = document.getElementById("hint-text");
 const toggleHintBtn = document.getElementById("toggle-hint-btn");
 
+const quizTypeSelection = document.getElementById("quiz-type-selection");
+
+
 

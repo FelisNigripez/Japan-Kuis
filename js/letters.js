@@ -10,9 +10,9 @@ checkbox.type = "checkbox";
 checkbox.value = char;
 checkbox.checked = true;
 
-
+const romaji = data[char];
 label.appendChild(checkbox);
-label.appendChild(document.createTextNode(char));
+label.appendChild(document.createTextNode(`${char} = ${romaji}`));
 lettersContainer.appendChild(label);
 });
 }

@@ -39,11 +39,6 @@ const hiragana = {
 
   // Spesial
   "ゔ":"VU",
-
-  // Huruf kecil
-  "ぁ":"A","ぃ":"I","ぅ":"U","ぇ":"E","ぉ":"O",
-  "ゃ":"YA","ゅ":"YU","ょ":"YO",
-  "っ":"TSU","ゎ":"WA"
 };
 
 

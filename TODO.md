@@ -3,3 +3,8 @@
 - [x] Add darkMode state to state.js
 - [x] Implement toggle logic in menu.js
 - [x] Test the toggle functionality
+- [x] Add music upload feature to menu
+- [x] Add CSS styles for music controls
+- [x] Extend sound.js for background music playback
+- [x] Add play/pause controls for uploaded music
+- [x] Test music upload and playback

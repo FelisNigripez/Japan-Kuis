@@ -10,9 +10,21 @@
   <div class="theme-toggle">
     <button id="theme-toggle-btn">🌙 Dark Mode</button>
   </div>
-  
+
 <div id="menu">
   <h1>Kuis Alfabet Jepang</h1>
+
+  <!-- MUSIC UPLOAD SECTION -->
+  <div class="music-section">
+    <h3>Upload Musik (.mp3, .wav, .mp4, dll.)</h3>
+    <input type="file" id="music-upload" accept="audio/*" />
+    <div class="music-controls">
+      <button id="play-music-btn">▶ Play Musik</button>
+      <button id="pause-music-btn" disabled>⏸ Pause</button>
+      <button id="stop-music-btn" disabled>⏹ Stop</button>
+    </div>
+    <audio id="background-music" loop></audio>
+  </div>
 
 
 

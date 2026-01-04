@@ -247,7 +247,7 @@ function scrollToCurrentWord() {
 ========================= */
 function updateMeaning() {
   typingMeaning.textContent =
-    typingWords[typingIndex]?.arti || "";
+    (typingWords[typingIndex]?.romaji + " = " + typingWords[typingIndex]?.arti) || "";
 }
 
 /* =========================
@@ -264,7 +264,6 @@ function startTypingTimer() {
     if (typingTime <= 0) {
       clearInterval(typingTimer);
       typingInput.disabled = true;
-      alert("Waktu habis!");
       document.getElementById("typing-stats").classList.remove("hidden");
     }
   }, 1000);

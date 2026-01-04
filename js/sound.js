@@ -27,6 +27,7 @@ const MusicManager = {
     const nextBtn = document.getElementById('next-music-btn');
     const audio = document.getElementById('background-music');
 
+
     musicUpload.addEventListener('change', (event) => {
       const files = Array.from(event.target.files);
       if (files.length > 0) {
@@ -53,6 +54,19 @@ const MusicManager = {
     audio.addEventListener('error', (e) => {
       console.error('Audio error:', e);
       alert('Error memuat file musik. Coba file lain.');
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      this.updateProgress();
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      this.updateProgress();
+    });
+
+    const progressContainer = document.querySelector('.progress-container');
+    progressContainer.addEventListener('click', (e) => {
+      this.seekToClick(e);
     });
   },
 
@@ -100,6 +114,13 @@ const MusicManager = {
     audio.src = track.url;
     audio.load();
     this.currentType = 'file';
+
+    // Reset progress bar
+    const progressTrack = document.getElementById('music-progress-track');
+    const progressThumb = document.getElementById('music-progress-thumb');
+    progressTrack.style.width = '0%';
+    progressThumb.style.left = '0px';
+    document.getElementById('music-time').textContent = '0:00 / 0:00';
 
     // Generate and set thumbnail
     this.generateThumbnail(track).then(thumbnailSrc => {
@@ -218,6 +239,8 @@ const MusicManager = {
 
   updateControls(isPlaying) {
     const playPauseBtn = document.getElementById('play-pause-music-btn');
+    const progressContainer = document.querySelector('.progress-container');
+
     playPauseBtn.disabled = this.playlist.length === 0;
     playPauseBtn.textContent = isPlaying ? '⏸ Pause' : '▶ Play';
 
@@ -225,5 +248,56 @@ const MusicManager = {
     const hasMultipleTracks = this.playlist.length > 1;
     document.getElementById('prev-music-btn').disabled = !hasMultipleTracks;
     document.getElementById('next-music-btn').disabled = !hasMultipleTracks;
+
+    // Enable/disable progress bar
+    if (this.playlist.length === 0) {
+      progressContainer.style.opacity = '0.5';
+      progressContainer.style.pointerEvents = 'none';
+    } else {
+      progressContainer.style.opacity = '1';
+      progressContainer.style.pointerEvents = 'auto';
+    }
+  },
+
+  updateProgress() {
+    const audio = document.getElementById('background-music');
+    const progressTrack = document.getElementById('music-progress-track');
+    const progressThumb = document.getElementById('music-progress-thumb');
+    const progressContainer = document.querySelector('.progress-container');
+    const timeDisplay = document.getElementById('music-time');
+
+    if (audio.duration && !isNaN(audio.duration)) {
+      const progress = (audio.currentTime / audio.duration) * 100;
+      const containerWidth = progressContainer.offsetWidth;
+      const thumbPosition = (progress / 100) * containerWidth;
+
+      progressTrack.style.width = `${progress}%`;
+      progressThumb.style.left = `${thumbPosition}px`;
+
+      const currentTime = this.formatTime(audio.currentTime);
+      const duration = this.formatTime(audio.duration);
+      timeDisplay.textContent = `${currentTime} / ${duration}`;
+    }
+  },
+
+  seekToClick(e) {
+    const audio = document.getElementById('background-music');
+    const progressContainer = document.querySelector('.progress-container');
+    const rect = progressContainer.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const containerWidth = rect.width;
+
+    if (audio.duration && !isNaN(audio.duration)) {
+      const seekPercent = (clickX / containerWidth) * 100;
+      const seekTime = (seekPercent / 100) * audio.duration;
+      audio.currentTime = seekTime;
+      this.updateProgress();
+    }
+  },
+
+  formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   }
 };

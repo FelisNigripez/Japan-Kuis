@@ -3,7 +3,7 @@
 ========================= */
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 body {
@@ -300,15 +300,26 @@ body.dark-mode #typing-meaning {
 ========================= */
 
 .music-section {
-  margin: 20px 0;
-  padding: 15px;
+  position: absolute;
+  top: 60px; /* Below dark mode button (10px top + ~40px button height + 10px gap) */
+  right: 10px;
+  width: 240px; /* 2x dark mode button width */
+  height: 290px; /* Square-like, following width */
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
+  padding: 10px;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .music-section h3 {
-  margin-top: 0;
+  margin: 0 0 8px 0;
+  font-size: 14px;
   color: #ecf0f1;
+  text-align: center;
 }
 
 body.dark-mode .music-section h3 {
@@ -316,31 +327,157 @@ body.dark-mode .music-section h3 {
 }
 
 .music-section input[type="file"] {
-  margin: 10px 0;
-  padding: 5px;
+  width: 100%;
+  margin: 5px 0;
+  padding: 3px;
+  font-size: 12px;
 }
 
 .music-controls {
-  margin-top: 10px;
+  margin: 8px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .music-controls button {
-  background-color: #e74c3c;
+  background-color: #2ecc71;
   color: white;
   border: none;
-  padding: 8px 16px;
-  border-radius: 5px;
+  padding: 6px 10px;
+  border-radius: 4px;
   cursor: pointer;
-  margin: 0 5px;
+  margin: 2px;
+  font-size: 12px;
 }
 
 .music-controls button:hover {
-  background-color: #c0392b;
+  background-color: #24aa5c;
+  transition: background-color 0.5s ease;
 }
 
 .music-controls button:disabled {
   background-color: #7f8c8d;
   cursor: not-allowed;
+}
+
+/* =========================
+   PLAYLIST
+========================= */
+
+.playlist {
+  flex: 1;
+  width: 100%;
+  margin: 45px 0;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  max-height: 120px;
+}
+
+.playlist h4 {
+  margin: 0 0 5px 0;
+  color: #ecf0f1;
+  font-size: 12px;
+  text-align: center;
+}
+
+body.dark-mode .playlist h4 {
+  color: #2c3e50;
+}
+
+#playlist-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#playlist-items li {
+  padding: 4px 6px;
+  margin: 1px 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 11px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#playlist-items li:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#playlist-items li.active {
+  background-color: #2ecc71;
+  color: white;
+  font-weight: bold;
+}
+
+body.dark-mode #playlist-items li {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode #playlist-items li:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* =========================
+   CURRENT TRACK
+========================= */
+
+.current-track {
+  width: 100%;
+  margin: 5px 0;
+  padding: 8px 6px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.current-track.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.track-thumbnail {
+  width: 120px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+body.dark-mode .current-track {
+  background-color: rgba(46, 204, 113, 0.3);
+}
+
+#music-upload {
+  display: none;
+}
+
+.custom-file-btn {
+  display: inline-block;
+  background-color: #3498db;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  text-align: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.custom-file-btn:hover {
+  background-color: #2980b9;
+}
+
+.custom-file-btn:active {
+  transform: scale(0.95);
 }
 
 /* =========================

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Kuis Alfabet Jepang</title>
   <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 
@@ -16,14 +17,24 @@
 
   <!-- MUSIC UPLOAD SECTION -->
   <div class="music-section">
-    <h3>Upload Musik (.mp3, .wav, .mp4, dll.)</h3>
-    <input type="file" id="music-upload" accept="audio/*" />
-    <div class="music-controls">
-      <button id="play-music-btn">▶ Play Musik</button>
-      <button id="pause-music-btn" disabled>⏸ Pause</button>
-      <button id="stop-music-btn" disabled>⏹ Stop</button>
+    <h1>Musik</h1>
+    <div id="current-track" class="current-track hidden">
+      <img id="track-thumbnail" class="track-thumbnail" src="" alt="Track thumbnail">
     </div>
-    <audio id="background-music" loop></audio>
+    <input type="file" id="music-upload" accept="audio/*,video/mp4" multiple />
+    <label for="music-upload" class="custom-file-btn">
+  🎵 Pilih Musik
+</label>
+<div class="music-controls">
+  <button id="prev-music-btn" disabled>⏮ Previous</button>
+  <button id="play-pause-music-btn">▶ Play</button>
+  <button id="next-music-btn" disabled>⏭ Next</button>
+</div>
+<div id="playlist" class="playlist hidden">
+  <h4>Daftar Musik:</h4>
+  <ul id="playlist-items"></ul>
+</div>
+    <audio id="background-music"></audio>
   </div>
 
 

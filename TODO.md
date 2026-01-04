@@ -8,3 +8,9 @@
 - [x] Extend sound.js for background music playback
 - [x] Add play/pause controls for uploaded music
 - [x] Test music upload and playback
+- [x] Remove YouTube link functionality (kept only file upload)
+- [x] Add playlist functionality for multiple music files
+- [x] Add previous/next track controls
+- [x] Add playlist UI with clickable tracks
+- [x] Add current track display
+- [x] Add auto-play next track when current ends

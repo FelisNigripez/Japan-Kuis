@@ -152,7 +152,8 @@ body.dark-mode #letters-container {
   margin: 10px auto;
   padding: 15px;
   border-radius: 8px;
-  background-color: #fff8dc;
+  background-color: white;
+  color: black;
   font-size: 32px;
   line-height: 60px;
   overflow: hidden;
@@ -165,7 +166,8 @@ body.dark-mode #letters-container {
 }
 
 body.dark-mode #typing-text {
-  background-color: #34495e;
+  background-color: #2B2A2A;
+  color: white;
 }
 
 #typing-text::-webkit-scrollbar {
@@ -177,9 +179,15 @@ body.dark-mode #typing-text {
 }
 
 #typing-text .current {
-  background-color: yellow;
+  background-color: black;
+  color: white;
   padding: 2px;
   border-radius: 4px;
+}
+
+body.dark-mode #typing-text .current {
+  background-color: white;
+  color: black;
 }
 
 #typing-text .correct-word {
@@ -204,8 +212,11 @@ body.dark-mode #typing-text {
 }
 
 #typing-meaning {
-  color: #555;
+  color: white;
   margin-left: 5px;
+}
+body.dark-mode #typing-meaning {
+  color: black;
 }
 
 .hidden-meaning {

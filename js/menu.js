@@ -40,16 +40,16 @@ modeBtns.forEach(btn => {
   }
 });
 
-/* =====================
-   THEME TOGGLE
-===================== */
-themeToggleBtn.onclick = () => {
-  darkMode = !darkMode;
-  localStorage.setItem("darkMode", darkMode);
+  /* =====================
+    THEME TOGGLE
+  ===================== */
+  themeToggleBtn.onclick = () => {
+    darkMode = !darkMode;
+    localStorage.setItem("darkMode", darkMode);
+    document.body.classList.toggle("dark-mode", darkMode);
+    themeToggleBtn.textContent = darkMode ? "☀️ Light Mode" : "🌙 Dark Mode";
+  };
+
+  // Initialize theme on page load
   document.body.classList.toggle("dark-mode", darkMode);
   themeToggleBtn.textContent = darkMode ? "☀️ Light Mode" : "🌙 Dark Mode";
-};
-
-// Initialize theme on page load
-document.body.classList.toggle("dark-mode", darkMode);
-themeToggleBtn.textContent = darkMode ? "☀️ Light Mode" : "🌙 Dark Mode";

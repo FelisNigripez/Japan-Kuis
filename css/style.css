@@ -316,9 +316,8 @@ body.dark-mode #typing-meaning {
   justify-content: flex-start;
 }
 
-.music-section h3 {
+.music-section h1 {
   margin: 0 0 8px 0;
-  font-size: 14px;
   color: #ecf0f1;
   text-align: center;
 }
@@ -502,6 +501,15 @@ body.dark-mode #playlist-items li:hover {
   object-fit: cover;
   border-radius: 4px;
   flex-shrink: 0;
+}
+
+.track-video {
+  width: 120px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: none; /* Initially hidden, controlled by JS */
 }
 
 body.dark-mode .current-track {

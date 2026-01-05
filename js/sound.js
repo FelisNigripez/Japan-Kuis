@@ -26,7 +26,7 @@ const MusicManager = {
     const prevBtn = document.getElementById('prev-music-btn');
     const nextBtn = document.getElementById('next-music-btn');
     const audio = document.getElementById('background-music');
-
+    const video = document.getElementById('track-video');
 
     musicUpload.addEventListener('change', (event) => {
       const files = Array.from(event.target.files);
@@ -47,6 +47,7 @@ const MusicManager = {
       this.next();
     });
 
+    // Audio event listeners
     audio.addEventListener('ended', () => {
       this.onEnded();
     });
@@ -61,6 +62,24 @@ const MusicManager = {
     });
 
     audio.addEventListener('loadedmetadata', () => {
+      this.updateProgress();
+    });
+
+    // Video event listeners
+    video.addEventListener('ended', () => {
+      this.onEnded();
+    });
+
+    video.addEventListener('error', (e) => {
+      console.error('Video error:', e);
+      alert('Error memuat file video. Coba file lain.');
+    });
+
+    video.addEventListener('timeupdate', () => {
+      this.updateProgress();
+    });
+
+    video.addEventListener('loadedmetadata', () => {
       this.updateProgress();
     });
 
@@ -110,10 +129,7 @@ const MusicManager = {
     this.currentIndex = index;
     const track = this.playlist[index];
     const audio = document.getElementById('background-music');
-
-    audio.src = track.url;
-    audio.load();
-    this.currentType = 'file';
+    const video = document.getElementById('track-video');
 
     // Reset progress bar
     const progressTrack = document.getElementById('music-progress-track');
@@ -122,15 +138,37 @@ const MusicManager = {
     progressThumb.style.left = '0px';
     document.getElementById('music-time').textContent = '0:00 / 0:00';
 
-    // Generate and set thumbnail
-    this.generateThumbnail(track).then(thumbnailSrc => {
-      const thumbnailImg = document.getElementById('track-thumbnail');
-      thumbnailImg.src = thumbnailSrc;
+    // Generate and set thumbnail or video
+    const fileType = track.file.type.toLowerCase();
+    if (fileType.includes('video') || fileType.includes('mp4')) {
+      // For video files, show the video element and use video for playback
+      video.src = track.url;
+      video.muted = false; // Enable sound for video
+      video.load(); // Ensure video loads
+      video.style.display = 'block';
+      document.getElementById('track-thumbnail').style.display = 'none';
+      this.currentType = 'video';
 
       // Show current track display
       const currentTrackDiv = document.getElementById('current-track');
       currentTrackDiv.classList.remove('hidden');
-    });
+    } else {
+      // For audio files, use audio element and generate thumbnail
+      audio.src = track.url;
+      audio.load();
+      this.currentType = 'audio';
+
+      this.generateThumbnail(track).then(thumbnailSrc => {
+        const thumbnailImg = document.getElementById('track-thumbnail');
+        thumbnailImg.src = thumbnailSrc;
+        thumbnailImg.style.display = 'block';
+        document.getElementById('track-video').style.display = 'none';
+
+        // Show current track display
+        const currentTrackDiv = document.getElementById('current-track');
+        currentTrackDiv.classList.remove('hidden');
+      });
+    }
 
     // Update playlist UI
     this.updatePlaylistUI();
@@ -179,35 +217,58 @@ const MusicManager = {
 
   togglePlayPause() {
     const audio = document.getElementById('background-music');
+    const video = document.getElementById('track-video');
 
-    if (this.currentType === 'file' && this.playlist.length > 0) {
-      if (audio.paused) {
-        this.play();
-      } else {
-        this.pause();
+    if (this.playlist.length > 0) {
+      if (this.currentType === 'audio') {
+        if (audio.paused) {
+          this.play();
+        } else {
+          this.pause();
+        }
+      } else if (this.currentType === 'video') {
+        if (video.paused) {
+          this.play();
+        } else {
+          this.pause();
+        }
       }
     }
   },
 
   play() {
-    if (this.currentType === 'file' && this.playlist.length > 0) {
-      document.getElementById('background-music').play();
+    if (this.playlist.length > 0) {
+      if (this.currentType === 'audio') {
+        document.getElementById('background-music').play();
+      } else if (this.currentType === 'video') {
+        document.getElementById('track-video').play();
+      }
     }
     this.updateControls(true);
   },
 
   pause() {
-    if (this.currentType === 'file') {
-      document.getElementById('background-music').pause();
+    if (this.playlist.length > 0) {
+      if (this.currentType === 'audio') {
+        document.getElementById('background-music').pause();
+      } else if (this.currentType === 'video') {
+        document.getElementById('track-video').pause();
+      }
     }
     this.updateControls(false);
   },
 
   stop() {
-    if (this.currentType === 'file') {
-      const audio = document.getElementById('background-music');
-      audio.pause();
-      audio.currentTime = 0;
+    if (this.playlist.length > 0) {
+      if (this.currentType === 'audio') {
+        const audio = document.getElementById('background-music');
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (this.currentType === 'video') {
+        const video = document.getElementById('track-video');
+        video.pause();
+        video.currentTime = 0;
+      }
     }
     this.updateControls(false);
   },
@@ -261,36 +322,56 @@ const MusicManager = {
 
   updateProgress() {
     const audio = document.getElementById('background-music');
+    const video = document.getElementById('track-video');
     const progressTrack = document.getElementById('music-progress-track');
     const progressThumb = document.getElementById('music-progress-thumb');
     const progressContainer = document.querySelector('.progress-container');
     const timeDisplay = document.getElementById('music-time');
 
-    if (audio.duration && !isNaN(audio.duration)) {
-      const progress = (audio.currentTime / audio.duration) * 100;
+    let mediaElement;
+    if (this.currentType === 'audio') {
+      mediaElement = audio;
+    } else if (this.currentType === 'video') {
+      mediaElement = video;
+    } else {
+      return;
+    }
+
+    if (mediaElement.duration && !isNaN(mediaElement.duration)) {
+      const progress = (mediaElement.currentTime / mediaElement.duration) * 100;
       const containerWidth = progressContainer.offsetWidth;
       const thumbPosition = (progress / 100) * containerWidth;
 
       progressTrack.style.width = `${progress}%`;
       progressThumb.style.left = `${thumbPosition}px`;
 
-      const currentTime = this.formatTime(audio.currentTime);
-      const duration = this.formatTime(audio.duration);
+      const currentTime = this.formatTime(mediaElement.currentTime);
+      const duration = this.formatTime(mediaElement.duration);
       timeDisplay.textContent = `${currentTime} / ${duration}`;
     }
   },
 
   seekToClick(e) {
     const audio = document.getElementById('background-music');
+    const video = document.getElementById('track-video');
     const progressContainer = document.querySelector('.progress-container');
     const rect = progressContainer.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const containerWidth = rect.width;
 
-    if (audio.duration && !isNaN(audio.duration)) {
+    let mediaElement;
+    if (this.currentType === 'audio') {
+      mediaElement = audio;
+    } else if (this.currentType === 'video') {
+      mediaElement = video;
+    } else {
+      return;
+    }
+
+    if (mediaElement.duration && !isNaN(mediaElement.duration)) {
       const seekPercent = (clickX / containerWidth) * 100;
-      const seekTime = (seekPercent / 100) * audio.duration;
-      audio.currentTime = seekTime;
+      const seekTime = (seekPercent / 100) * mediaElement.duration;
+      mediaElement.currentTime = seekTime;
       this.updateProgress();
     }
   },

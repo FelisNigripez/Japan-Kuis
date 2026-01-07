@@ -14,6 +14,9 @@ body {
   color: #ecf0f1;
   overflow-x: hidden;
 }
+.title {
+  text-align: left;
+}
 
 body.dark-mode {
   background-color: #F5F5F5;
@@ -21,42 +24,64 @@ body.dark-mode {
 }
 
 button {
-  padding: 10px 20px;
-  margin: 5px;
+  padding: 20px 20px;
+  margin: 10px;
   cursor: pointer;
 }
+
+.mode-buttons {
+  margin-bottom: 20px;
+}
+
 
 .mode-btn {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
-  background-image: none;
-  border: none;
-  box-shadow: none;
-
-  border-radius: 6px;
-  padding: 10px 20px;
-  margin: 5px;
-  cursor: pointer;
+position: relative;
+border: none;
+border-radius: 6px;
+padding: 15px 20px;
+margin: 15px;
+cursor: pointer;
+z-index: 1;
+background-color: #2ecc71;
+color: white;
+gap: 200px;
 }
 
+
+
+
+.mode-btn:hover {
+  background-color: #3498db;
+}
 /* =========================
    MODE BUTTON
 ========================= */
-
-.mode-buttons {
-  margin-bottom: 10px;
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+.hover-button{
+  position: absolute;
+  left: 48.5%;
+  bottom: 15%;
+  width: 40%;
+  z-index: 0;
+  transition: all 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.wrapper:has(.mode-btn:hover) .hover-button {
+  opacity: 1;
+  transform: translate(0%, -75%) scale(1);
 }
 
-.mode-btn {
-  background-color: #2ecc71;
-  color: white;
-}
+
+
+
 
 
 /* =========================
-   QUIZ
+  QUIZ
 ========================= */
 
 .question {

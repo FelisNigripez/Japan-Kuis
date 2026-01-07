@@ -13,7 +13,7 @@
   </div>
 
 <div id="menu">
-  <h1>Kuis Alfabet Jepang</h1>
+  <h1 class="title">Kuis Alfabet Jepang</h1>
 
   <!-- MUSIC UPLOAD SECTION -->
   <div class="music-section">
@@ -46,17 +46,22 @@
     <audio id="background-music"></audio>
   </div>
 
-
-
-<div class="mode-buttons">
-      <button class="mode-btn" data-mode="typing">Typing Jepang</button>
+  
+  
+  <div class="mode-buttons">
+    <div class="wrapper">
+      <img src="img/488b4a80497f4eee3380afb41944ca65.gif  " alt="preview" class="hover-button">
+      <button class="mode-btn" id="only-typing" data-mode="typing">Typing Jepang</button>
+    </div>
 
 
   <!-- WRAPPER KIRI-KANAN -->
   <div class="main-mode-wrapper">
-
     <!-- KIRI -->
+    <div class="wrapper">
+      <img src="img/488b4a80497f4eee3380afb41944ca65.gif  " alt="preview" class="hover-button">
       <button id="guess-btn" class="mode-btn">Tebak Karakter</button>
+    </div>
 
       <div id="guess-submenu" class="hidden">
         <button class="sub-mode-btn" data-mode="hiragana">Hiragana</button>

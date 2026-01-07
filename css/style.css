@@ -9,7 +9,8 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  margin: 20px;
+  margin: 0 20px 20px 20px;
+  padding-top: 60px; /* Space for fixed navbar */
   background-color: #2c3e50;
   color: #ecf0f1;
   overflow-x: hidden;
@@ -36,6 +37,7 @@ button {
 
 .mode-btn {
 position: relative;
+top: 50px;
 border: none;
 border-radius: 6px;
 padding: 15px 20px;
@@ -44,7 +46,6 @@ cursor: pointer;
 z-index: 1;
 background-color: #2ecc71;
 color: white;
-gap: 200px;
 }
 
 
@@ -63,7 +64,7 @@ gap: 200px;
 .hover-button{
   position: absolute;
   left: 48.5%;
-  bottom: 15%;
+  top: 70%;
   width: 40%;
   z-index: 0;
   transition: all 0.3s ease;
@@ -119,12 +120,12 @@ li.wrong { color: #e74c3c; }
 ========================= */
 
 .settings {
-  margin: 15px 0;
+  margin: 75px 0;
 }
 
 .settings label {
   display: block;
-  margin: 5px 0;
+  margin: 10px 0;
 }
 
 /* =========================
@@ -311,11 +312,42 @@ body.dark-mode #typing-meaning {
 
 
 /* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  background-color: #34495e;
+  color: #ecf0f1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+body.dark-mode .navbar {
+  background-color: #bdc3c7;
+  color: #2c3e50;
+}
+
+.navbar .title {
+  margin: 0;
+  font-size: 24px;
+  text-align: left;
+}
+
+/* =========================
    THEME TOGGLE
 ========================= */
 
 .theme-toggle {
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .theme-toggle button {
@@ -326,10 +358,6 @@ body.dark-mode #typing-meaning {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  position: absolute;
-    top: 10px;
-  right: 10px;
-  z-index: 10;
 }
 
 .theme-toggle button:hover {
@@ -342,7 +370,7 @@ body.dark-mode #typing-meaning {
 
 .music-section {
   position: absolute;
-  top: 60px; /* Below dark mode button (10px top + ~40px button height + 10px gap) */
+  top: 90px; /* Below navbar (navbar height ~50px + 20px gap) */
   right: 10px;
   width: 240px; /* 2x dark mode button width */
   height: 320px; /* Increased height to accommodate progress bar */

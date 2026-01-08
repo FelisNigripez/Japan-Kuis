@@ -117,16 +117,36 @@
     >
 
     <button id="submit-answer">Submit</button>
-    
+
     <div id="hint-container" class="hidden">
       <span id="hint-text"></span>
     </div>
-    
+
   </div>
-  
+
   <!-- SUBMIT & TIMER DI LUAR -->
   <button id="toggle-hint-btn">Tampilkan arti</button>
   <div id="timer"></div>
+
+  <!-- QUIZ RESULT OVERLAY -->
+  <div id="quiz-result-overlay" class="hidden">
+    <div class="result-content">
+      <h3>Hasil Kuis Tebak Karakter</h3>
+      <div class="result-stats">
+        <div class="stat-item correct-stat">
+          <strong>Total Benar:</strong> <span id="total-correct">0</span>
+        </div>
+        <div class="stat-item incorrect-stat">
+          <strong>Total Salah:</strong> <span id="total-incorrect">0</span>
+        </div>
+        <div class="stat-item percentage-stat">
+          <strong>Persentase:</strong> <span id="percentage">0%</span>
+        </div>
+      </div>
+      <button id="continue-to-full-result">Lihat Detail Lengkap</button>
+      <button id="restart-from-overlay">Main Lagi</button>
+    </div>
+  </div>
 </div>
 
 

@@ -52,7 +52,7 @@ toggleHintBtn.textContent = "Tampilkan arti";
 
 function nextQuestion() {
   if (count >= totalQuestions) {
-    showResult();
+    showQuizResultOverlay();
     return;
   }
 
@@ -190,4 +190,29 @@ toggleHintBtn.onclick = () => {
   toggleHintBtn.textContent = hintVisible
     ? "Sembunyikan arti"
     : "Tampilkan arti";
+};
+
+function showQuizResultOverlay() {
+  // Calculate totals
+  const totalCorrect = history.filter(h => h.correct).length;
+  const totalIncorrect = history.filter(h => !h.correct).length;
+  const percentage = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
+
+  // Update overlay elements
+  document.getElementById('total-correct').textContent = totalCorrect;
+  document.getElementById('total-incorrect').textContent = totalIncorrect;
+  document.getElementById('percentage').textContent = percentage + '%';
+
+  // Show overlay
+  document.getElementById('quiz-result-overlay').classList.remove('hidden');
+}
+
+// Event listeners for overlay buttons
+document.getElementById('continue-to-full-result').onclick = () => {
+  document.getElementById('quiz-result-overlay').classList.add('hidden');
+  showResult();
+};
+
+document.getElementById('restart-from-overlay').onclick = () => {
+  location.reload();
 };

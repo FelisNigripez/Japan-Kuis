@@ -1,16 +1,4 @@
-- [x] Add dark mode toggle button to index.html menu
-- [x] Add dark mode CSS styles to style.css
-- [x] Add darkMode state to state.js
-- [x] Implement toggle logic in menu.js
-- [x] Test the toggle functionality
-- [x] Add music upload feature to menu
-- [x] Add CSS styles for music controls
-- [x] Extend sound.js for background music playback
-- [x] Add play/pause controls for uploaded music
-- [x] Test music upload and playback
-- [x] Remove YouTube link functionality (kept only file upload)
-- [x] Add playlist functionality for multiple music files
-- [x] Add previous/next track controls
-- [x] Add playlist UI with clickable tracks
-- [x] Add current track display
-- [x] Add auto-play next track when current ends
+- [x] Modify showResult function in js/result.js to display total correct, total incorrect, and percentage instead of list
+- [x] Add CSS styles in css/style.css for small page-like result display
+- [x] Update HTML structure if needed for better layout (not needed)
+- [ ] Test the changes

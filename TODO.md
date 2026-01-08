@@ -4,3 +4,4 @@
 - [x] Change nextQuestion to show overlay instead of full result page
 - [x] Add overlay HTML structure and functionality
 - [x] Test the changes (implementation complete)
+- [x] Change overlay to full screen with own background, centered, overlaying quiz feature

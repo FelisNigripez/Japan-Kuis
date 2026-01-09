@@ -1,7 +1,1 @@
-- [x] Modify showResult function in js/result.js to display total correct, total incorrect, and percentage instead of list
-- [x] Add CSS styles in css/style.css for small page-like result display
-- [x] Update HTML structure if needed for better layout (not needed)
-- [x] Change nextQuestion to show overlay instead of full result page
-- [x] Add overlay HTML structure and functionality
-- [x] Test the changes (implementation complete)
-- [x] Change overlay to full screen with own background, centered, overlaying quiz feature
+- [x] Removed color coding feature for percentage in quiz result (reverted to original blue color)

@@ -1,1 +1,2 @@
 - [x] Removed color coding feature for percentage in quiz result (reverted to original blue color)
+- [x] Changed navbar color to be opposite of dark mode: white navbar in normal mode, dark navbar in dark mode

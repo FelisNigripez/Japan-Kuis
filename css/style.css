@@ -120,12 +120,96 @@ li.wrong { color: #e74c3c; }
 ========================= */
 
 .settings {
-  margin: 75px 0;
+  margin: 75px auto;
+  max-width: 400px;
+  background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode .settings {
+  background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.settings:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
 .settings label {
-  display: block;
-  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ecf0f1;
+  margin: 0;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  position: relative;
+}
+
+body.dark-mode .settings label {
+  color: #2c3e50;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.settings label:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.02);
+}
+
+body.dark-mode .settings label:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.settings label::before {
+  content: "⏱️";
+  font-size: 24px;
+  margin-right: 15px;
+}
+
+.settings label:nth-child(2)::before {
+  content: "📋";
+}
+
+.settings input {
+  margin-left: auto;
+  padding: 8px 12px;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  background: #fff;
+  color: #2c3e50;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  width: 80px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.settings input:focus {
+  outline: none;
+  border-color: #2ecc71;
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+}
+
+body.dark-mode .settings input {
+  background: #34495e;
+  color: #ecf0f1;
+  border-color: #3498db;
+}
+
+body.dark-mode .settings input:focus {
+  border-color: #2ecc71;
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
 }
 
 /* =========================

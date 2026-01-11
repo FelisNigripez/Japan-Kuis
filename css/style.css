@@ -415,9 +415,24 @@ body.dark-mode #typing-meaning {
   box-sizing: border-box;
 }
 
+.navbar::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent);
+  pointer-events: none;
+}
+
 body.dark-mode .navbar {
   background-color: #34495e;
   color: #ecf0f1;
+}
+
+body.dark-mode .navbar::after {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), transparent);
 }
 
 .navbar .title {
